@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undertale: Math Blaster</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="game-wrapper">
+        <!-- Oyunun çizileceği alan (arka plan gibi davranacak) -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- Oyun Arayüzü (Canvas'ın üzerinde) -->
+        <div id="ui-overlay">
+            
+            <div id="question-container">
+                <div id="question-box">
+                    <p id="question-text">* Asgore sana bir soru soruyor...</p>
+                </div>
+            </div>
+
+            <div id="answer-display-area">
+                CEVAP: <span id="current-answer-text"></span>
+            </div>
+
+            <div id="stats-container">
+                <div id="hp-area">
+                    HP <div id="hp-bar-container"><div id="hp-bar"></div></div> <span id="hp-text">20 / 20</span>
+                </div>
+                <div id="score-area">
+                    SKOR: <span id="score-value">0</span>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Oyun Bitti Ekranı -->
+        <div id="game-over-screen" class="hidden">
+            <h1>OYUN BİTTİ</h1>
+            <p>Yeniden başlamak için F5'e bas.</p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

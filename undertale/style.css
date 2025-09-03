@@ -1,0 +1,142 @@
+/* Temel Sıfırlama ve Kurulum */
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* Kaydırma çubuklarını engelle */
+}
+
+body {
+    background-color: #000;
+    color: #fff;
+    font-family: 'VT323', monospace;
+    font-size: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    image-rendering: pixelated; /* Pikselli görünüm */
+}
+
+/* Oyunun ana çerçevesi */
+#game-wrapper {
+    position: relative;
+    width: 95vw; /* Ekran genişliğinin %95'i */
+    height: 95vh; /* Ekran yüksekliğinin %95'i */
+    max-width: 1000px; /* Çok geniş ekranlarda bozulmasın */
+    max-height: 800px;
+    border: 3px solid #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Canvas'ı arka plan olarak konumlandır */
+#gameCanvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Tüm UI elemanlarını içeren katman */
+#ui-overlay {
+    position: relative;
+    z-index: 2; /* Canvas'ın üzerinde */
+    width: 100%;
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Üst ve alt elemanları kenarlara yasla */
+}
+
+/* Soru Kutusu (Üst) */
+#question-container {
+    width: 100%;
+    border: 3px solid #fff;
+    padding: 5px;
+}
+
+#question-box {
+    width: 100%;
+    min-height: 120px; /* Asgore'un sığması için */
+    border: 3px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+#question-text {
+    margin: 0;
+}
+
+/* İstatistikler (Alt) */
+#stats-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+#hp-area {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Elemanlar arası boşluk */
+}
+
+#hp-bar-container {
+    width: 150px;
+    height: 24px;
+    background-color: #f00; /* Can azaldığında görünecek kırmızı arka plan */
+    border: 2px solid #fff;
+}
+
+#hp-bar {
+    width: 100%; /* Genişlik JS ile ayarlanacak */
+    height: 100%;
+    background-color: #ff0; /* Sarı HP barı */
+}
+
+/* Girilen Cevabı Gösteren Alan */
+#answer-display-area {
+    position: absolute;
+    /* Bu değerler JS'deki battleBox'ın konumuna göre ayarlandı */
+    bottom: 270px; 
+    left: 50%;
+    transform: translateX(-50%);
+    border: 3px solid #fff;
+    padding: 5px 15px;
+    background-color: #000;
+}
+
+/* Oyun Bitti Ekranı */
+.hidden {
+    display: none !important;
+}
+
+#game-over-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    z-index: 10;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: #f00;
+}
+
+#game-over-screen h1 {
+    font-size: 80px;
+    margin: 0;
+}
