@@ -251,9 +251,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (healthFactor >= 1) {
                         if (this.hp <= this.maxHp * 0.25) {
-                            this.hp += 3;
+                            this.hp += 4;
                         } else {
-                            this.hp += 1;
+                            this.hp += 2;
                         }
                     }
                 }
@@ -508,4 +508,5 @@ document.addEventListener('DOMContentLoaded', () => {
         gameManager.init();
         gameLoop();
     });
+
 });
