@@ -23,6 +23,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const currentAnswerTextEl = document.getElementById('current-answer-text');
     const gameOverScreen = document.getElementById('game-over-screen');
 
+    // *** YENİ: ARKA PLAN MÜZİĞİ ***
+    const backgroundMusic = new Audio('song/asgore_theme.mp3');
+    backgroundMusic.loop = true; // Müziğin sürekli dönmesini sağlar
+    backgroundMusic.volume = 0.4; // Ses seviyesini ayarla (0.0 ile 1.0 arası)
+    let musicStarted = false; // Müziğin sadece bir kez başlatıldığından emin olmak için
+
     // Savaş kutusu artık canvas boyutuna göre dinamik
     const battleBox = {
         width: 0,
@@ -195,7 +201,15 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         setupEventListeners() {
-            window.addEventListener('keydown', (e) => this.keys[e.key] = true);
+            window.addEventListener('keydown', (e) => {
+                // *** YENİ: MÜZİĞİ BAŞLATMA MANTIĞI ***
+                // Kullanıcı herhangi bir tuşa ilk kez bastığında müziği başlat
+                if (!musicStarted) {
+                    backgroundMusic.play();
+                    musicStarted = true;
+                }
+                this.keys[e.key] = true;
+            });
             window.addEventListener('keyup', (e) => {
                 this.keys[e.key] = false;
                 if (e.key.toLowerCase() === 'z') this.handleSelection();
@@ -230,30 +244,20 @@ document.addEventListener('DOMContentLoaded', () => {
             if (parseInt(this.playerAnswer) === this.correctAnswer) {
                 this.score += 100;
 
-                // *** YENİ DETAYLI CAN YENİLEME MANTIĞI ***
-
-                // 1. Kural: Can %75'in üzerindeyse can yenileme.
+                // Detaylı can yenileme mantığı
                 if (this.hp <= this.maxHp * 0.75) {
-                    
-                    // 2. Kural: Alınan hasarın %60'ını hesapla (x).
                     const damageTaken = this.maxHp - this.hp;
                     const healthFactor = damageTaken * 0.60;
 
-                    // 3. Kural: Sadece x 1'den büyük veya eşitse can yenile.
                     if (healthFactor >= 1) {
-                        
-                        // 4. Kural: Can %25'in altındaysa +3, değilse +1 can ver.
                         if (this.hp <= this.maxHp * 0.25) {
-                            // Kritik can yenilemesi
                             this.hp += 3;
                         } else {
-                            // Normal can yenilemesi
                             this.hp += 1;
                         }
                     }
                 }
                 
-                // Canın maksimum değeri geçmediğinden emin ol.
                 this.hp = Math.min(this.maxHp, this.hp);
 
             } else {
